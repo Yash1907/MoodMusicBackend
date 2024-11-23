@@ -27,7 +27,7 @@ app.use(authMiddleware);
 app.use(pingRouter);
 
 // Error handler
-app.use((err, _, res, _) => {
+app.use((err, _, res, __) => {
   console.error(err.stack);
   res.status(err.statusCode || 500).json({
     error: err.message || "Internal Server Error",
