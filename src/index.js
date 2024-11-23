@@ -16,14 +16,18 @@ initSupabase();
 app.use(cors());
 app.use(express.json());
 
-app.get("/ping", (req, res) => {
+// This is above the auth middleware so that it can be accessed without it
+app.get("/ping", (_, res) => {
   res.json({ message: "pong" });
 });
 
 app.use(authMiddleware);
 
+// add routers to the app
+app.use(pingRouter);
+
 // Error handler
-app.use((err, req, res, next) => {
+app.use((err, _, res, _) => {
   console.error(err.stack);
   res.status(err.statusCode || 500).json({
     error: err.message || "Internal Server Error",
@@ -33,6 +37,3 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-// add router to app
-app.use(pingRouter);

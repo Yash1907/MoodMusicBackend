@@ -12,6 +12,6 @@ pingRouter.get("/ping-authenticated", (req, res) => {
   // req.user is available from the middleware
   res.json({
     message: "authenticated pong",
-    user: req.user,
+    user: req.user, // User gets added to the req object in the authMiddleware
   });
 });
