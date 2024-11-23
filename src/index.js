@@ -5,6 +5,7 @@ import { authMiddleware } from "./middleware/authMiddleware.js";
 import { initSupabase } from "./utils/supabase.js";
 import { pingRouter } from "./routes/pingRoute.js";
 import { playlistRouter } from "./routes/playlistRoute.js";
+import { songRouter } from "./routes/songRoute.js";
 
 dotenv.config();
 
@@ -26,7 +27,8 @@ app.use(authMiddleware);
 
 // add routers to the app
 app.use(pingRouter);
-app.use(playlistRouter)
+app.use(playlistRouter);
+app.use(songRouter);
 
 // Error handler
 app.use((err, _, res, __) => {
