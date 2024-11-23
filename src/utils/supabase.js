@@ -1,5 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
+SUPABASE_URL=process.env.SUPABASE_URL
+SUPABASE_SERVICE_KEY=process.env.SUPABASE_SERVICE_KEY
+SUPABASE_JWT_SECRET=process.env.SUPABASE_JWT_SECRET
+
 /**
  * @type {import('@supabase/supabase-js').SupabaseClient}
  */
