@@ -1,6 +1,6 @@
 import express from "express"
 import { supabase } from "../utils/supabase.js";
-import { authMiddleware } from "../middleware/authMiddleware";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 export const playlistRouter = express.Router();
 
