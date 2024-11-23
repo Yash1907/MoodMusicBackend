@@ -1,9 +1,10 @@
 import express from "express"
 import { supabase } from "../utils/supabase";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 export const playlistRouter = express.Router();
 
-playlistRouter.get("/get-playlist", async (req, res) => {
+playlistRouter.get("/get-playlist", authMiddleware, async (req, res) => {
   try{
     const userId = req.user.id;
     const { data: playlist, error } = await supabase.from("playlists").select("*").eq("user_id", userId);
@@ -15,7 +16,7 @@ playlistRouter.get("/get-playlist", async (req, res) => {
   }
 });
 
-playlistRouter.post("/create-playlist", async (req, res) => {
+playlistRouter.post("/create-playlist", authMiddleware, async (req, res) => {
   const { name, coverImage } = req.body;
   if(!name || !coverImage) return res.status(400).json({ message: "Name and cover image are required"});
   try{
@@ -31,6 +32,10 @@ playlistRouter.post("/create-playlist", async (req, res) => {
   } catch(err){
     return res.status(200).json({ message: "Server error", error: err.message});
   }
+});
+
+playlistRouter.get("/update-playlist", async(req, res) => {
+
 });
 
 export { playlistRouter };
